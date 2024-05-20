@@ -3,9 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Google Font: Libre Baskerville -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!--css file-->
+    <link rel="stylesheet" href="/css/styles.css">
     <title>The Snake Game</title>
 </head>
-<body>
-    <h1>Play Game</h1>
+<body class="font-libre bg-custom-black text-white flex justify-center items-center h-screen">
+    <div class="text-xl flex flex-col justify-center items-center">
+        <!--Stats-->
+        <div class="bg-custom-green flex justify-between items-center gap-x-32 px-8 py-4 rounded-lg">
+            <!--Time-->
+            <div class="flex justify-center items-center gap-x-2">
+                <img src="/images/time-icon.svg" alt="A clock icon">
+                <span><span id="time">0:00</span>s</span>
+            </div>
+            <!--Speed Mode-->
+            <div class="flex justify-center items-center gap-x-2">
+                <img src="/images/speed-icon.svg" alt="two triangles pointed right">
+                <span>Mode <span id="speed">1</span></span>
+            </div>
+            <!--Score-->
+            <div class="flex justify-center items-center">
+                <img src="/images/apple-score-icon.svg" alt="An apple">
+                <span>X <span id="speed">0</span></span>
+            </div>
+        </div>
+
+        <!--Game Board-->
+        <div id="gameBoard" class="grid my-2" style="display: grid; grid-template-columns: repeat(20, 30px); grid-template-rows: repeat(20, 30px);">
+        </div>
+
+        <!--Instructions-->
+        <div class="flex justify-between items-center gap-x-8">
+            <div>
+                <span class="font-bold">Play/Pause:</span>
+                <span>Spacebar</span>
+            </div>
+            <div>
+                <span class="font-bold">Speed:</span>
+                <span>1-8</span>
+            </div>
+            <div>
+                <span class="font-bold">Controls:</span>
+                <span>Arrow Keys</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/game.js"></script>
 </body>
 </html>

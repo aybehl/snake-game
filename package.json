@@ -29,8 +29,8 @@
     "tailwindcss": "^3.4.3"
   },
   "nodemonConfig": {
-    "watch": ["views/**/*.html","src/**/*.css", "server.js"],
-    "ext": "js,css",
+    "watch": ["views/**/*.html","src/**/*.css", "public/**/*.js", "server.js"],
+    "ext": "js,css,html",
     "exec": "npm run build-css && node server.js"
   }  
 }
