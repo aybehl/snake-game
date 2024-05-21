@@ -7,10 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'custom-green': '#275B52',
         'custom-black': '#1E1E1E',
-        'custom-green-square-dark': '#678C85',
-        'custom-green-square-light': '#7D9C97',
+        'custom-green-dark': '#678C85',
+        'custom-green-light': '#7D9C97',
+        'custom-green': '#275B52',
+        'custom-green-snake': '#275B52',
       },
       fontFamily: {
         'serif': ['"Inknut Antiqua"', 'serif'],
