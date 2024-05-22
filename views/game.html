@@ -18,12 +18,12 @@
             <!--Time-->
             <div class="flex justify-center items-center gap-x-2">
                 <img src="/images/time-icon.svg" alt="A clock icon">
-                <span><span id="time">0:00</span>s</span>
+                <span><span id="timer">0:00</span>s</span>
             </div>
             <!--Speed Mode-->
             <div class="flex justify-center items-center gap-x-2">
                 <img src="/images/speed-icon.svg" alt="two triangles pointed right">
-                <span>Mode <span id="speed">1</span></span>
+                <span>Mode <span id="speedMode">1</span></span>
             </div>
             <!--Score-->
             <div class="flex justify-center items-center">
@@ -51,6 +51,27 @@
                 <span>Arrow Keys</span>
             </div>
         </div>
+    </div>
+
+    <!--Game Over Pop up-->
+    <div id="popup" class="hidden flex flex-col justify-center items-center">
+        <!--Game Over Text-->
+        <div>
+            Game Over
+        </div>
+        <!--Game Stats-->
+        <div>
+            <div>
+                Score: <span></span>
+            </div>
+            <div>
+                Time: <span></span>
+            </div>
+        </div>
+        <div>
+            Press R to restart
+        </div>
+
     </div>
 
     <script src="/js/game.js"></script>

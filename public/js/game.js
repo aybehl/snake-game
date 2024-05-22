@@ -2,6 +2,19 @@ const GRID_SIZE = 20;
 let applePosition = {};
 let snakeArray = [];
 let numberOfApplesEaten = 0;
+let timeElapsedInSeconds = 0;
+let timeInterval = null;
+const speeds = {
+    1: 500, // Slowest speed, update every 500 milliseconds
+    2: 400,
+    3: 300,
+    4: 250,
+    5: 200,
+    6: 150,
+    7: 100,
+    8: 50   // Fastest speed, update every 50 milliseconds
+};
+let currentSpeed = 3; //Default speed
 /**
  * Game state variable, toggled to play or pause the game
  * By default, game is running
@@ -17,6 +30,9 @@ let direction = {
 
 const gameBoard = document.getElementById('gameBoard');
 const scoreSpan = document.getElementById('score');
+const timerSpan = document.getElementById('timer');
+const speedModeSpan = document.getElementById('speedMode');
+const popup = document.getElementById('popup');
 
 function getApplePosition(snakeArray){
     let position = {};
@@ -68,8 +84,9 @@ function drawBoard() {
         // Place the snake
         snakeArray.forEach(segment => {
             if(segment.x === x && segment.y === y){
-                //console.log("Snake " + x + " " + y);
-                square.classList.add('bg-custom-green-snake'); // Color for the snake
+                const snakeBody = document.createElement('div');
+                snakeBody.classList.add('w-full', 'h-full', 'bg-custom-green-snake', 'rounded-full', 'border', 'border-black');
+                square.appendChild(snakeBody);
             }
         });
 
@@ -119,8 +136,11 @@ function checkForCollision(){
         let segment = snakeArray[i];
         if(head.x === segment.x && head.y === segment.y){
            isGameRunning = false;
+        
+
+           popup.style.display = 'block';
            console.log('Game over');
-           window.location.href = '/gameOver';
+           //window.location.href = '/gameOver';
         }
     }
 }
@@ -135,8 +155,6 @@ function moveSnake(){
         x: (currentHead.x + direction.x + GRID_SIZE) % GRID_SIZE,
         y: (currentHead.y + direction.y + GRID_SIZE) % GRID_SIZE
     }
-
-    
 
     /**
      * Check if Snake ate the apple, if yes - 
@@ -167,22 +185,53 @@ function moveSnake(){
     drawBoard();
 }
 
+function startTimer(){
+    if(!timeInterval){
+        timeInterval = setInterval(() => {
+            timeElapsedInSeconds++;
+            displayTime();
+        }, 1000);
+    }
+}
+
+function pauseTimer(){
+    if(timeInterval !== null){
+        clearInterval(timeInterval);
+        timeInterval = null;
+    }
+}
+
+function displayTime(){
+    const minutes = Math.floor(timeElapsedInSeconds / 60);
+    const seconds = timeElapsedInSeconds % 60;
+
+    timerSpan.innerHTML = `${padTime(minutes)}:${padTime(seconds)}`;
+}
+
+// Helper function to pad the time values with leading zeros
+function padTime(time) {
+    return time.toString().padStart(2, '0');
+}
+
 /**
  * To update the game state repeatedly
  */
 function gameLoop(){
     if(!isGameRunning){
+        pauseTimer();
         return;
     }
 
     setTimeout(() => {
+        startTimer();
         moveSnake();
         gameLoop();
-    }, 200);
+    }, speeds[currentSpeed]);
 }
 
 function initialize() {
     initializeSnakeArray();
+    changeSpeed(currentSpeed);
     applePosition = getApplePosition(snakeArray);
     gameLoop();
 };
@@ -194,8 +243,13 @@ function changeDirection(x, y){
     direction.y = y;
 }
 
+function changeSpeed(key){
+    currentSpeed = key;
+    speedModeSpan.innerHTML = currentSpeed;
+}
+
 /**
- * Event Listener for the arrow keys
+ * Event Listener for the arrow keys, spacebar and the numbers for changing the speeds
  */
 document.addEventListener('keydown', event => {
     console.log(event);
@@ -231,6 +285,16 @@ document.addEventListener('keydown', event => {
                 gameLoop();
             }
 
+            break;
+        case '1':
+        case '2': 
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+            changeSpeed(event.key);
             break;
     }
 });
