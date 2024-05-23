@@ -12,7 +12,7 @@
     <title>The Snake Game</title>
 </head>
 <body class="font-libre bg-custom-black text-white flex justify-center items-center h-screen">
-    <div class="text-xl flex flex-col justify-center items-center">
+    <div id="game" class="text-xl flex flex-col justify-center items-center">
         <!--Stats-->
         <div class="bg-custom-green flex justify-between items-center gap-x-32 px-8 py-4 rounded-lg">
             <!--Time-->
@@ -54,17 +54,17 @@
     </div>
 
     <!--Game Over Pop up-->
-    <div id="popup" class="flex flex-col justify-center items-center gap-y-20 border p-28 rounded-2xl bg-custom-purple-light">
+    <div id="popup" class="flex flex-col justify-center items-center gap-y-20 p-28 rounded-2xl bg-custom-purple-light text-custom-purple-dark  z-20 relative">
         <!--Game Over Text-->
         <div class="text-6xl font-bold">
             Game Over
         </div>
         <!--Game Stats-->
         <div class="flex justify-between items-center gap-x-11">
-            <div class="text-xl ">
+            <div class="text-2xl">
                 Score: <span id="finalScore" class="font-bold">0</span>
             </div>
-            <div class="text-xl font-bold">
+            <div class="text-2xl font-bold">
                 Time: <span id="finalTime" class="font-bold">0:00s</span>
             </div>
         </div>

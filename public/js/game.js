@@ -1,8 +1,8 @@
 const GRID_SIZE = 20;
 let applePosition = {};
 let snakeArray = [];
-let numberOfApplesEaten = 0;
-let timeElapsedInSeconds = 0;
+let numberOfApplesEaten;
+let timeElapsedInSeconds;
 let timeInterval = null;
 const speeds = {
     1: 500, // Slowest speed, update every 500 milliseconds
@@ -14,25 +14,35 @@ const speeds = {
     7: 100,
     8: 50   // Fastest speed, update every 50 milliseconds
 };
-let currentSpeed = 3; //Default speed
+
+const defaultSpeed = 3; //Default speed
+let currentSpeed; 
 /**
  * Game state variable, toggled to play or pause the game
  * By default, game is running
  */
 let isGameRunning = true;
+let isGameOver = false;
 /**
  * At the start, make the snake move to the right
  */
-let direction = {
-    x: 1,
-    y: 0
+let direction;
+
+function initializeDirection(){
+    return {
+        x: 1,
+        y: 0
+    };
 }
 
+const game = document.getElementById('game');
 const gameBoard = document.getElementById('gameBoard');
 const scoreSpan = document.getElementById('score');
 const timerSpan = document.getElementById('timer');
 const speedModeSpan = document.getElementById('speedMode');
 const popup = document.getElementById('popup');
+const finalScoreSpan = document.getElementById('finalScore');
+const finalTimeSpan = document.getElementById('finalTime');
 
 function getApplePosition(snakeArray){
     let position = {};
@@ -106,7 +116,7 @@ function drawBoard() {
  * Snake always starts from the center and is made up of only one square
  */
 function initializeSnakeArray(){
-    snakeArray = [
+    return [
         {
             x: 10,
             y: 10
@@ -123,6 +133,22 @@ function initializeSnakeArray(){
             x: 7,
             y: 10
         }, 
+        {
+            x: 6,
+            y: 10
+        }, 
+        {
+            x: 5,
+            y: 10
+        }, 
+        {
+            x: 4,
+            y: 10
+        }, 
+        {
+            x: 3,
+            y: 10
+        }, 
     ];
 }
 
@@ -137,10 +163,14 @@ function checkForCollision(){
         if(head.x === segment.x && head.y === segment.y){
            isGameRunning = false;
         
-
-           popup.style.display = 'block';
+           finalScoreSpan.innerHTML = numberOfApplesEaten;
+           finalTimeSpan.innerHTML = timerSpan.innerHTML;
+           popup.style.display = 'flex';
+           game.style.display = 'none';
+           snakeArray = [];
+           drawBoard();
+           isGameOver = true;
            console.log('Game over');
-           //window.location.href = '/gameOver';
         }
     }
 }
@@ -230,8 +260,17 @@ function gameLoop(){
 }
 
 function initialize() {
-    initializeSnakeArray();
+    isGameRunning = true;
+    isGameOver = false;
+    game.style.display = 'flex';
+    popup.style.display = 'none';
+    snakeArray = initializeSnakeArray();
+    currentSpeed = defaultSpeed;
+    numberOfApplesEaten = 0;
+    timeElapsedInSeconds = 0;
+    timeInterval = null;
     changeSpeed(currentSpeed);
+    direction = initializeDirection();
     applePosition = getApplePosition(snakeArray);
     gameLoop();
 };
@@ -285,6 +324,13 @@ document.addEventListener('keydown', event => {
                 gameLoop();
             }
 
+            break;
+        case 'r':
+            if(isGameOver){
+                console.log('R is pressed');
+                initialize();
+            }
+            
             break;
         case '1':
         case '2': 
