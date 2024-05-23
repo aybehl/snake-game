@@ -12,6 +12,8 @@ module.exports = {
         'custom-green-light': '#7D9C97',
         'custom-green': '#275B52',
         'custom-green-snake': '#275B52',
+        'custom-purple-light': "#8F6EC7",
+        'custom-purple-dark': '#37225B'
       },
       fontFamily: {
         'serif': ['"Inknut Antiqua"', 'serif'],

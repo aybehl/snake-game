@@ -54,21 +54,21 @@
     </div>
 
     <!--Game Over Pop up-->
-    <div id="popup" class="hidden flex flex-col justify-center items-center">
+    <div id="popup" class="flex flex-col justify-center items-center gap-y-20 border p-28 rounded-2xl bg-custom-purple-light">
         <!--Game Over Text-->
-        <div>
+        <div class="text-6xl font-bold">
             Game Over
         </div>
         <!--Game Stats-->
-        <div>
-            <div>
-                Score: <span></span>
+        <div class="flex justify-between items-center gap-x-11">
+            <div class="text-xl ">
+                Score: <span id="finalScore" class="font-bold">0</span>
             </div>
-            <div>
-                Time: <span></span>
+            <div class="text-xl font-bold">
+                Time: <span id="finalTime" class="font-bold">0:00s</span>
             </div>
         </div>
-        <div>
+        <div class="text-xl font-bold">
             Press R to restart
         </div>
 
